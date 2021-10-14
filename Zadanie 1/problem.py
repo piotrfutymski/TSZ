@@ -72,17 +72,15 @@ class Solution:
         self.permutation = permutation
         self.Lmax = Lmax
     
-    def __init__(self):
-         self.n = 0
+    def __init__(self, n):
+         self.n = n
 
     def loadFromFile(self, filename):
         f = open(filename, "r")
         line = f.readline().split(" ")
-        n = int(line[0])
-        self.n = n
-        self.permutation = [0] * n
+        self.permutation = [0] * self.n
         self.Lmax = 0
-        self.Lmax = int(line[1])
+        self.Lmax = int(line[0])
         line = f.readline().split(" ")
         for i in range(self.n): 
             self.permutation[i] = int(line[i])
@@ -151,3 +149,12 @@ def generate(n):
     problem.r[problem.r.index(min(problem.r))] = 0
 
     return problem
+
+
+def createDummyOutput(filename, n):
+     f = open(filename, "w")
+     f.write("0")
+     f.write("\n")
+     for i in range(n):
+         f.write(str(i))
+         f.write(" ")

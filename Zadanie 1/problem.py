@@ -73,7 +73,9 @@ class Solution:
         self.Lmax = Lmax
     
     def __init__(self, n):
-         self.n = n
+        self.n = n
+        self.permutation = [i for i in range(0, n)]
+        self.Lmax = 0
 
     def loadFromFile(self, filename):
         f = open(filename, "r")
@@ -84,6 +86,12 @@ class Solution:
         line = f.readline().split(" ")
         for i in range(self.n): 
             self.permutation[i] = int(line[i])
+
+    def saveToFile(self, filename):
+        f = open(filename, "w")
+        f.write(str(self.Lmax))
+        f.write("\n")
+        f.write(" ".join([str(k) for k in self.permutation]))       
 
 
 
@@ -150,11 +158,3 @@ def generate(n):
 
     return problem
 
-
-def createDummyOutput(filename, n):
-     f = open(filename, "w")
-     f.write("0")
-     f.write("\n")
-     for i in range(n):
-         f.write(str(i))
-         f.write(" ")

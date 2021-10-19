@@ -3,12 +3,19 @@ from os import walk, path
 
 filenames = next(walk("in/"), (None, None, []))[2]  # [] if no file
 
+def createDummyOutput(filename, n):
+     f = open(filename, "w")
+     f.write("0")
+     f.write("\n")
+     for i in range(n):
+         f.write(str(i))
+         f.write(" ")
 
 def generateDummyOutput():
     for file in filenames:
         problem = prob.SchedulingProblem(0)
         problem.loadFromFile("in/"+ file)
-        prob.createDummyOutput("out/" + file, problem.n)
+        createDummyOutput("out/" + file, problem.n)
 
 
 def weryfikacja(PROBLEM):
@@ -28,14 +35,11 @@ def weryfikacja(PROBLEM):
         if(i != problem.n-1):
             time += problem.s[solution.permutation[i]][solution.permutation[i+1]]
 
-    print("Lmax for " + PROBLEM + " = " + str(Lmax))
-    print("Lmax in output, for " + PROBLEM + " = " + str(solution.Lmax))
+    toPrint = str(Lmax) + "\t --->   Lmax for " + PROBLEM + ", Lmax in output: " + str(solution.Lmax)
     if(Lmax != solution.Lmax):
-        print("ERROR!!!")
+        toPrint = toPrint + " - ERROR!!!"
     else:
-        print("Correct :)")
+        toPrint = toPrint + " - Correct :)"
+    print(toPrint)
 
 
-def weryfikacjaAll():
-    for file in filenames:
-        weryfikacja(file)

@@ -1,8 +1,10 @@
 from ctypes import Array
 import problem as prob
 from statistics import mean
+import math
 
-LL_PARAM = 10
+LL_PARAM = 20
+LL_2PARAM = 23
 
 def chooseJob(jobsToUse, time, problem: prob.SchedulingProblem, last, Lmax, M):
     L = max(0, Lmax)
@@ -12,13 +14,12 @@ def chooseJob(jobsToUse, time, problem: prob.SchedulingProblem, last, Lmax, M):
         if(last == -1):
             zm = max(problem.r[j] - time, 0)
         t = zm + time + problem.p[j]
-        zm = (zm/M)**2  
-        ll = 0
-        if(t < problem.d[j]):
-            ll = problem.d[j] - t
-            ll = ((ll/M)**2)/(LL_PARAM * problem.n)      
-        
-
+        zm = (zm/M)**2  *0.7
+        ll = problem.d[j] - t
+        if ll > 0:   
+            ll = ((ll/M)**2)/(LL_PARAM * problem.n)
+        else:
+             ll = -((ll/M)**2)/(LL_2PARAM * problem.n)
         scores.append(zm + ll)
 
     index = 0
@@ -32,7 +33,7 @@ def chooseJob(jobsToUse, time, problem: prob.SchedulingProblem, last, Lmax, M):
 def solve(problem: prob.SchedulingProblem):
     sol :prob.Solution = prob.Solution(problem.n)
     sol.permutation = []
-    jobsToUse = [i for i in range(problem.n)]
+    jobsToUse = list(range(problem.n))
     M = max(problem.p)
     time = 0
     last = -1

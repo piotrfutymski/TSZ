@@ -4,28 +4,44 @@ from statistics import mean
 import math
 
 LL_PARAM = 20
-LL_2PARAM = 23
+LL_2PARAM = 16
+ZM_PARAM = 0.8
 
-def chooseJob(jobsToUse, time, problem: prob.SchedulingProblem, last, Lmax, M):
-    L = max(0, Lmax)
-    scores = []  
-    for j in jobsToUse:
+
+def calculateScoreForJob(j, time, problem: prob.SchedulingProblem, last, Lmax, M):
         zm = max(problem.r[j] - time, problem.s[last][j])
         if(last == -1):
             zm = max(problem.r[j] - time, 0)
         t = zm + time + problem.p[j]
-        zm = (zm/M)**2  *0.7
+        zm = (zm/M)**2  * ZM_PARAM
         ll = problem.d[j] - t
         if ll > 0:   
             ll = ((ll/M)**2)/(LL_PARAM * problem.n)
         else:
              ll = -((ll/M)**2)/(LL_2PARAM * problem.n)
-        scores.append(zm + ll)
+        return zm + ll
+
+def calculateTimeForJob(j, time, problem: prob.SchedulingProblem, last):
+        zm = max(problem.r[j] - time, problem.s[last][j])
+        if(last == -1):
+            zm = max(problem.r[j] - time, 0)
+        t = zm + time + problem.p[j]
+        return t
+
+def chooseJob(jobsToUse, time, problem: prob.SchedulingProblem, last, Lmax, M):
+    L = max(0, Lmax)
+    scores = []  
+    for j in jobsToUse:
+        scores.append(calculateScoreForJob(j, time, problem, last, Lmax, M))
 
     index = 0
+    secIndex = index
     for i in range(len(jobsToUse)):
         if(scores[i] < scores[index]):
+            secIndex = index
             index = i
+
+    t = calculateTimeForJob(index, time, problem, last)
 
     return jobsToUse[index]
 

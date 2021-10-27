@@ -18,7 +18,7 @@ def generateDummyOutput():
         createDummyOutput("out/" + file, problem.n)
 
 
-def weryfikacja(PROBLEM):
+def weryfikacja(PROBLEM, v):
     problem = prob.SchedulingProblem(0)
     problem.loadFromFile("in/"+ PROBLEM)
 
@@ -35,7 +35,7 @@ def weryfikacja(PROBLEM):
         if(i != problem.n-1):
             time += problem.s[solution.permutation[i]][solution.permutation[i+1]]
 
-    toPrint = str(Lmax) + "\t --->   Lmax for " + PROBLEM + ", Lmax in output: " + str(solution.Lmax)
+    toPrint = str(Lmax) + "\t[ "+ format(v, '.5f') +" ]\t --->   Lmax for " + PROBLEM + ", Lmax in output: " + str(solution.Lmax)
     if(Lmax != solution.Lmax):
         toPrint = toPrint + " - ERROR!!!"
     else:

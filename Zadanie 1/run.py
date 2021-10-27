@@ -12,15 +12,15 @@ def generateSoultions():
         problem = prob.SchedulingProblem(0)
         problem.loadFromFile("in/"+ file)
         a = algorithm.solve(problem)
-        values.append(a.Lmax)
-        a.saveToFile("out/"+ file)
+        values.append(a[1])
+        a[0].saveToFile("out/"+ file)
 
 def weryfikacjaAll():
+    i = 0
     for file in filenames:
-        utils.weryfikacja(file)
+        utils.weryfikacja(file, values[i])
+        i+=1
 
 
 generateSoultions()
 weryfikacjaAll()
-print("Mean:\t" + str(mean(values)))
-print("Median:\t" + str(median(values)))

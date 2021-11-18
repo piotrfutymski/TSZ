@@ -43,13 +43,13 @@ class SchedulingProblem:
         self.b = [0] * 4
         line = f.readline().split(" ")
         for i in range(len(line)):
-            self.b[i] = int(line[i])
+            self.b[i] = float(line[i])
         for i in range(self.n): 
             line = f.readline().split(" ")
-            self.p[i] = int(line[0])
-            self.r[i] = int(line[1])
-            self.d[i] = int(line[2])
-            self.w[i] = int(line[3])
+            self.p[i] = float(line[0])
+            self.r[i] = float(line[1])
+            self.d[i] = float(line[2])
+            self.w[i] = float(line[3])
 
 
 class Solution:

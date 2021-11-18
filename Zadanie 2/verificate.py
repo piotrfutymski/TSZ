@@ -11,7 +11,7 @@ def weryfikacja(PROBLEM):
     res = 0
 
     for machine in range(len(solution.permutation)):
-        time = 0
+        time = 0.0
         for i in range(len(solution.permutation[machine])):
             task_num = solution.permutation[machine][i] - 1
             time = max(time, problem.r[task_num])

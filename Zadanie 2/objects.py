@@ -58,28 +58,30 @@ class Solution:
         self.permutation = permutation
         self.res = res
     
-    def __init__(self, n):
+    def __init__(self, n:int):
         self.n = n
         self.permutation = []
         i = 1
         for j in range(3):
-            self.permutation.append([k for k in range(i, i+n/4)])
-            i = i+n/4
+            self.permutation.append([k for k in range(i, i+int(n/4))])
+            i = i+int(n/4)
         self.permutation.append([k for k in range(i, n+1)])
         self.res = 0
 
     def loadFromFile(self, filename):
         f = open(filename, "r")
         line = f.readline().split(" ")
-        self.res = int(line[0])
+        self.res = float(line[0])
         self.permutation = []
         n = 0
         for i in range(4):
-            line = f.readline().split(" ")
             self.permutation.append([])
-            for j in range(len(line)): 
-                self.permutation[i].append(int(line[j]))
-                n += 1
+            allLine = f.readline()
+            if(allLine != '\n'):
+                line = allLine.split(" ")
+                for j in range(len(line)): 
+                    self.permutation[i].append(int(line[j]))
+                    n += 1
         self.n = n
 
     def saveToFile(self, filename):

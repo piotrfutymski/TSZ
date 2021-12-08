@@ -34,20 +34,19 @@ class SchedulingProblem:
         self.n = n
         self.p = []
         for i in range(n):
-            self.p.append([0]*n)
+            self.p.append([0]*4)
         self.d = [0] * n
         self.a = [0] * n
         self.b = [0] * n
-        line = f.readline().split(" ")
         for i in range(self.n): 
             line = f.readline().split(" ")
-            self.p[i][0] = float(line[0])
-            self.p[i][1] = float(line[1])
-            self.p[i][2] = float(line[2])
-            self.p[i][3] = float(line[3])
-            self.d[i] = float(line[4])
-            self.a[i] = float(line[5])
-            self.b[i] = float(line[6])
+            self.p[i][0] = int(line[0])
+            self.p[i][1] = int(line[1])
+            self.p[i][2] = int(line[2])
+            self.p[i][3] = int(line[3])
+            self.d[i] = int(line[4])
+            self.a[i] = int(line[5])
+            self.b[i] = int(line[6])
 
 
 class Solution:
@@ -64,7 +63,7 @@ class Solution:
     def loadFromFile(self, filename):
         f = open(filename, "r")
         line = f.readline().split(" ")
-        self.res = float(line[0])
+        self.res = int(line[0])
         self.permutation = []
         n = 0
         allLine = f.readline()

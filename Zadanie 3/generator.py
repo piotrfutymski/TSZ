@@ -5,7 +5,7 @@ AVERAGE_P = [[20,20,20,5],[45,10,15,2],[5,10,30,10], [10,40,15,3]]
 SIGMA_P = 0.2
 
 D_0 = 70
-D = 21
+D = 25
 SIGMA_D = 0.5
 A = [7,1,4,2]
 B = [3,9,6,8]
@@ -21,6 +21,8 @@ def generate(n):
         time += D 
         problem.a[i] = A[index]
         problem.b[i] = B[index]
+        if(i == int((n*4)/5)):
+            time = D_0
     return problem
 
 

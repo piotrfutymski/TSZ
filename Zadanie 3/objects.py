@@ -55,7 +55,7 @@ class Solution:
         self.permutation = permutation
         self.res = res
     
-    def __init__(self, n:int):
+    def __init__(self, n):
         self.n = n
         self.permutation = [k for k in range(1, n+1)]
         self.res = 0

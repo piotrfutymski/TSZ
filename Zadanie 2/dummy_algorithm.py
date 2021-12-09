@@ -16,5 +16,3 @@ def generateSoultions(file):
     a.saveToFile("out/"+ file)
     print(str(time_2-time_1) + " - time in [ms]")
         
-
-generateSoultions(sys.argv[1])

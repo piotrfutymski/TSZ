@@ -23,12 +23,16 @@ def weryfikacja(PROBLEM):
         v = problem.a[i] * e + problem.b[i] * d
         res += v
 
-    toPrint = str(res) + " ---> Res for " + PROBLEM + ", Res in output: " + str(solution.res)
-    if(res != solution.res):
-        toPrint = toPrint + " - ERROR!!!"
-    else:
-        toPrint = toPrint + " - Correct :)"
+    toPrint = str(res) #+ " ---> Res for " + PROBLEM + ", Res in output: " + str(solution.res)
+    #if(res != solution.res):
+    #    toPrint = toPrint + " - ERROR!!!"
+    #else:
+    #    toPrint = toPrint + " - Correct :)"
     print(toPrint)
 
 
-weryfikacja(sys.argv[1])
+#weryfikacja(sys.argv[1])
+tab = ["141320", "141220", "141317", "141286", "141337", "141216", "141244"]
+for index in tab:
+    for n in range(50,550,50):
+        weryfikacja(index+"_"+str(n)+".txt")
